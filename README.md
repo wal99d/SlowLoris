@@ -1,6 +1,6 @@
 # Simple Slow Loris DDoS: For Educational Purposes Only
 
-Just right the command specifiying the URL, Port, Number of Scokets to open, and Timer Period in Seconds:
+To use properly issue the below command specifiying the URL, Port, Number of Scokets to open, and Timer Period in Seconds:
 ```
 python slowloris.py www.example.com 80 100 10
 # here 80 is the port number
