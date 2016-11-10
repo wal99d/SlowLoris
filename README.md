@@ -9,6 +9,6 @@ python slowloris.py www.example.com 80 100 10
 
 ```
 
-Use with caution, the auther is not responsible for any damages cause by this CODE
+Use with caution, the auther is not responsible for any damages caused by this CODE
 
 
