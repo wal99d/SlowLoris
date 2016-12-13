@@ -31,7 +31,11 @@ def main():
     socket_list=[]
     for _ in range(int(socket_count)):
         try:
+<<<<<<< HEAD
             #print("\t{}".format(_))
+=======
+            print("{}Creating Socket# {}".format("\t",_))
+>>>>>>> aa967984703dc764d559b16a38f11cd080076319
             s=init_socket(ip,port)
         except socket.error:
             break
@@ -46,9 +50,13 @@ def main():
             except socket.error:
                 socket_list.remove(s)
         for _ in range(socket_count - len(socket_list)):
+<<<<<<< HEAD
             print("\033[1;34;40m {}Re-creating Socket# {}".format("\n",_))
+=======
+>>>>>>> aa967984703dc764d559b16a38f11cd080076319
             try:
-                s=init_socket(ip,port)
+                print("{}Re-Creating Socket# {}".format("\t",_))
+				s=init_socket(ip,port)
                 if s:
                     socket_list.append(s)
             except socket.error:
