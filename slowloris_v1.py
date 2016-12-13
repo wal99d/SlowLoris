@@ -31,7 +31,7 @@ def main():
     socket_list=[]
     for _ in range(int(socket_count)):
         try:
-            print("{}Creating Socket# {}".format("\n",_))
+            print("{}Creating Socket# {}".format("\t",_))
             s=init_socket(ip,port)
         except socket.error:
             break
@@ -46,9 +46,9 @@ def main():
             except socket.error:
                 socket_list.remove(s)
         for _ in range(socket_count - len(socket_list)):
-            print("{}Re-creating Socket...".format("\n"))
             try:
-                s=init_socket(ip,port)
+                print("{}Re-Creating Socket# {}".format("\t",_))
+				s=init_socket(ip,port)
                 if s:
                     socket_list.append(s)
                     bar.next()
